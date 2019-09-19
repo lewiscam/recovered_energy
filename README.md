@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c07aff30-91d9-4e25-b0b5-f48a3e6eec31/deploy-status)](https://app.netlify.com/sites/recovered-energy/deploys)
+
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
   <a href="https://www.gatsbyjs.org">
