@@ -1,5 +1,6 @@
 import React from "react"
-
+import SpecSheet from './../components/spec-sheet';
+import Description from './../components/description';
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { Heading, Button, Menu, Tabs, Tab, Box } from "grommet"
@@ -18,10 +19,10 @@ const ProductsPage = () => (
     />
     <Tabs justify="start">
       <Tab title="Description">
-        <Box pad="medium">Product Description goes here</Box>
+        <Box pad="medium"><Description/></Box>
       </Tab>
       <Tab title="Specifications">
-        <Box pad="medium">Spec sheet goes here</Box>
+        <Box pad="medium"><SpecSheet/></Box>
       </Tab>
       <Tab title="Documentation">
         <Box pad="medium">documentation goes here</Box>
