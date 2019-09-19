@@ -6,7 +6,7 @@ import { Heading } from "grommet"
 const Header = ({ siteTitle }) => (
   <header
     style={{
-      background: `rebeccapurple`,
+      background: `#66bc7d`,
       marginBottom: `1.45rem`,
     }}
   >
@@ -26,6 +26,15 @@ const Header = ({ siteTitle }) => (
           }}
         >
           {siteTitle}
+        </Link>
+        <Link
+          to="/products"
+          style={{
+            color: `white`,
+            textDecoration: `none`,
+          }}
+        >
+          Products
         </Link>
       </Heading>
     </div>
