@@ -4,50 +4,35 @@ import { Table, TableHeader, TableCell, TableRow, TableBody } from "grommet"
 const SpecSheet = () => {
   const [testArray, setTestArray] = useState([
     {
-     
-      spec: "Spec1",
-      value: "Value1",
+      spec_name: "Spec1",
+      spec_value: "Value1",
     },
     {
-      
-      spec: "Spec2",
-      value: "Value2",
+      spec_name: "Spec2",
+      spec_value: "Value2",
     },
     {
-      
-      spec: "Spec3",
-      value: "Value3",
+      spec_name: "Spec3",
+      spec_value: "Value3",
     },
   ])
 
-  function displaySpecs(){
-      return testArray.map((specs, index) => {
-           return( <TableRow key={specs.spec}>
+  function displaySpecs() {
+    return testArray.map((specs, index) => {
+      return (
+        <TableRow key={specs.spec_name}>
           <TableCell scope="row">
-            <strong>{specs.spec}</strong>
+            <strong>{specs.spec_name}</strong>
           </TableCell>
-          <TableCell>{specs.value}</TableCell>
+          <TableCell>{specs.spec_value}</TableCell>
         </TableRow>
-      )})
-
+      )
+    })
   }
-  
+
   return (
     <Table>
-      <TableHeader>
-        <TableRow>
-          <TableCell scope="col" border="bottom">
-            Specification
-          </TableCell>
-          <TableCell scope="col" border="bottom">
-            Specification Value
-          </TableCell>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-       {displaySpecs()}
-        
-      </TableBody>
+      <TableBody>{displaySpecs()}</TableBody>
     </Table>
   )
 }
