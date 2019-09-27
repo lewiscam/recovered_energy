@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import SpecSheet from "./../components/spec-sheet"
 import Description from "./../components/description"
 import Layout from "../components/layout"
@@ -6,31 +6,36 @@ import SEO from "../components/seo"
 import { graphql } from "gatsby"
 import { Heading, Button, Menu, Tabs, Tab, Box } from "grommet"
 
-const ProductsPage = ({ data: { prismicModel } }) => {
+const ProductsPage = ({ data: { prismicModel, prismicSize } }) => {
   // const model = data.prismicModel.data
-  const { data } = prismicModel
-  console.log(data)
+  const model = prismicModel.data
+  const sizes = prismicSize.data
+  const [size, setSize] = useState(prismicSize.uid)
+
+  console.log(sizes)
   return (
     <Layout>
       <SEO title="Products" />
-      <Heading level={1}>{data.product_name.text}</Heading>
+      <Heading level={1}>{model.product_name.text}</Heading>
       <Button label="Get a Quote"></Button>
       <Menu
         label="Size"
         items={[
-          { label: "Some Size", onClick: () => {} },
-          { label: "Another Size", onClick: () => {} },
+          {
+            label: sizes.product_size_name.text,
+            onClick: () => {},
+          },
         ]}
       />
       <Tabs justify="start">
         <Tab title="Description">
           <Box pad="medium">
-            <Description content={data.product_description.html} />
+            <Description content={model.product_description.html} />
           </Box>
         </Tab>
         <Tab title="Specifications">
           <Box pad="medium">
-            <SpecSheet />
+            <SpecSheet size={size} />
           </Box>
         </Tab>
         <Tab title="Documentation">
@@ -50,6 +55,16 @@ const ProductsPage = ({ data: { prismicModel } }) => {
 export default ProductsPage
 export const pageQuery = graphql`
   query modelQuery($uid: String) {
+    prismicSize(data: { parent_model: { uid: { eq: $uid } } }) {
+      uid
+      id
+      data {
+        product_size_name {
+          html
+          text
+        }
+      }
+    }
     prismicModel(uid: { eq: $uid }) {
       uid
       data {
