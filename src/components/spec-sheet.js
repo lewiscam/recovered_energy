@@ -2,10 +2,7 @@ import React, { useState } from "react"
 import { Table, TableHeader, TableCell, TableRow, TableBody } from "grommet"
 import { graphql } from "gatsby"
 
-const SpecSheet = (props, { data: { prismicSizeBodySpecSheet } }) => {
-  const { data } = prismicSizeBodySpecSheet
-  console.log(props.size)
-  console.log(data)
+const SpecSheet = props => {
   const [testArray, setTestArray] = useState([
     {
       spec_name: "Spec1",
@@ -42,17 +39,3 @@ const SpecSheet = (props, { data: { prismicSizeBodySpecSheet } }) => {
 }
 
 export default SpecSheet
-export const specSheetQuery = graphql`
-  query specSheetQuery($uid: String) {
-    prismicSizeBodySpecSheet(uid: { eq: $uid }) {
-      items {
-        spec_name {
-          text
-        }
-        spec_value {
-          text
-        }
-      }
-    }
-  }
-`

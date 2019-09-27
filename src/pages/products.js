@@ -11,6 +11,7 @@ const ProductsPage = ({ data: { prismicModel, prismicSize } }) => {
   const model = prismicModel.data
   const sizes = prismicSize.data
   const [size, setSize] = useState(prismicSize.uid)
+  console.log(sizes)
 
   console.log(sizes)
   return (
@@ -62,6 +63,39 @@ export const pageQuery = graphql`
         product_size_name {
           html
           text
+        }
+        body {
+          ... on PrismicSizeBodyDocumentation {
+            id
+            items {
+              attachment {
+                url
+                target
+                size
+                name
+              }
+            }
+          }
+          ... on PrismicSizeBodyPictures {
+            id
+            items {
+              product_size_image {
+                url
+                alt
+              }
+            }
+          }
+          ... on PrismicSizeBodySpecSheet {
+            id
+            items {
+              spec_name {
+                text
+              }
+              spec_value {
+                text
+              }
+            }
+          }
         }
       }
     }
