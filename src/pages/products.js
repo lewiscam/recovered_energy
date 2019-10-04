@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import SpecSheet from "./../components/spec-sheet"
 import Description from "./../components/description"
+import Photos from "./../components/photos"
+import Documentation from "./../components/documentation"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
@@ -13,6 +15,7 @@ const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
   const sizes = allPrismicSize.edges.filter(
     element => element.node.data.parent_model.uid === prismicModel.uid
   )
+  console.log(sizes)
   const [size, setSize] = useState(allPrismicSize.edges[0])
 
   const sizesList = sizes.map(size => ({
@@ -40,10 +43,14 @@ const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
           </Box>
         </Tab>
         <Tab title="Documentation">
-          <Box pad="medium">documentation goes here</Box>
+          <Documentation
+            size={getSlice(size, "PrismicSizeBodyDocumentation")}
+          />
         </Tab>
         <Tab title="Photos">
-          <Box pad="medium">photos go here</Box>
+          <Box pad="medium">
+            <Photos size={getSlice(size, "PrismicSizeBodyPictures")} />
+          </Box>
         </Tab>
         <Tab title="Spare Parts">
           <Box pad="medium">Spare Parts list goes here</Box>
