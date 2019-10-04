@@ -6,7 +6,7 @@ import Documentation from "./../components/documentation"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
-import { Heading, Button, Menu, Tabs, Tab, Box } from "grommet"
+import { Heading, Button, Menu, Tabs, Tab, Box, Select } from "grommet"
 
 const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
   const model = prismicModel.data

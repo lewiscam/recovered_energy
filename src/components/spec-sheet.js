@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Table, TableHeader, TableCell, TableRow, TableBody } from "grommet"
+import { Table, Box, TableCell, TableRow, TableBody } from "grommet"
 import { graphql } from "gatsby"
 
 const SpecSheet = props => {

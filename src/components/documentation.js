@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Carousel, Image, Anchor } from "grommet"
+import { Box, Anchor } from "grommet"
 
 const Documentation = props => {
   console.log(props.size)

@@ -1,5 +1,5 @@
 import React from "react"
-import { Paragraph } from "grommet"
+import { Paragraph, Box } from "grommet"
 
 const Description = props => {
   return (
