@@ -4,7 +4,7 @@ import { Box, Carousel, Image } from "grommet"
 const Photos = props => {
   console.log(props.size)
   return (
-    <Box height="large" width="medium" overflow="hidden">
+    <Box height="large" width="medium" pad="medium" overflow="hidden">
       <Carousel fill>
         {props.size.items.map(item => {
           return (

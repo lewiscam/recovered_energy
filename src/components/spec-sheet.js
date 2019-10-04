@@ -18,9 +18,11 @@ const SpecSheet = props => {
   }
 
   return (
-    <Table>
-      <TableBody>{displaySpecs(props.size)}</TableBody>
-    </Table>
+    <Box pad="medium">
+      <Table>
+        <TableBody>{displaySpecs(props.size)}</TableBody>
+      </Table>
+    </Box>
   )
 }
 

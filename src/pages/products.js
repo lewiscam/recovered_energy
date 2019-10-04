@@ -33,14 +33,10 @@ const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
       <Menu label="Size" items={sizesList} />
       <Tabs justify="start">
         <Tab title="Description">
-          <Box pad="medium">
-            <Description content={model.product_description.html} />
-          </Box>
+          <Description content={model.product_description.html} />
         </Tab>
         <Tab title="Specifications">
-          <Box pad="medium">
-            <SpecSheet size={getSlice(size, "PrismicSizeBodySpecSheet")} />
-          </Box>
+          <SpecSheet size={getSlice(size, "PrismicSizeBodySpecSheet")} />
         </Tab>
         <Tab title="Documentation">
           <Documentation
@@ -48,9 +44,7 @@ const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
           />
         </Tab>
         <Tab title="Photos">
-          <Box pad="medium">
-            <Photos size={getSlice(size, "PrismicSizeBodyPictures")} />
-          </Box>
+          <Photos size={getSlice(size, "PrismicSizeBodyPictures")} />
         </Tab>
         <Tab title="Spare Parts">
           <Box pad="medium">Spare Parts list goes here</Box>
