@@ -1,9 +1,13 @@
 import React from "react"
-import { Paragraph } from "grommet"
+import { Paragraph, Box } from "grommet"
 
 const Description = props => {
   return (
-    <Paragraph dangerouslySetInnerHTML={{ __html: props.content }}></Paragraph>
+    <Box pad="medium">
+      <Paragraph
+        dangerouslySetInnerHTML={{ __html: props.content }}
+      ></Paragraph>
+    </Box>
   )
 }
 

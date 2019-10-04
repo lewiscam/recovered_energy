@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Table, TableHeader, TableCell, TableRow, TableBody } from "grommet"
+import { Table, Box, TableCell, TableRow, TableBody } from "grommet"
 import { graphql } from "gatsby"
 
 const SpecSheet = props => {
@@ -18,9 +18,11 @@ const SpecSheet = props => {
   }
 
   return (
-    <Table>
-      <TableBody>{displaySpecs(props.size)}</TableBody>
-    </Table>
+    <Box pad="medium">
+      <Table>
+        <TableBody>{displaySpecs(props.size)}</TableBody>
+      </Table>
+    </Box>
   )
 }
 
