@@ -6,28 +6,28 @@ import SEO from "../components/seo"
 import { graphql } from "gatsby"
 import { Heading, Button, Menu, Tabs, Tab, Box } from "grommet"
 
-const ProductsPage = ({ data: { prismicModel, prismicSize } }) => {
-  // const model = data.prismicModel.data
+const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
   const model = prismicModel.data
-  const sizes = prismicSize.data
-  const [size, setSize] = useState(prismicSize.uid)
-  console.log(sizes)
 
-  console.log(sizes)
+  //TODO: do this filter in the query
+  const sizes = allPrismicSize.edges.filter(
+    element => element.node.data.parent_model.uid === prismicModel.uid
+  )
+  const [size, setSize] = useState(allPrismicSize.edges[0])
+
+  const sizesList = sizes.map(size => ({
+    label: size.node.data.product_size_name.text,
+    onClick: () => setSize(size),
+  }))
+  const getSlice = (size, key) => {
+    return size.node.data.body.filter(element => element.__typename === key)[0]
+  }
   return (
     <Layout>
       <SEO title="Products" />
       <Heading level={1}>{model.product_name.text}</Heading>
       <Button label="Get a Quote"></Button>
-      <Menu
-        label="Size"
-        items={[
-          {
-            label: sizes.product_size_name.text,
-            onClick: () => {},
-          },
-        ]}
-      />
+      <Menu label="Size" items={sizesList} />
       <Tabs justify="start">
         <Tab title="Description">
           <Box pad="medium">
@@ -36,7 +36,7 @@ const ProductsPage = ({ data: { prismicModel, prismicSize } }) => {
         </Tab>
         <Tab title="Specifications">
           <Box pad="medium">
-            <SpecSheet size={size} />
+            <SpecSheet size={getSlice(size, "PrismicSizeBodySpecSheet")} />
           </Box>
         </Tab>
         <Tab title="Documentation">
@@ -55,50 +55,7 @@ const ProductsPage = ({ data: { prismicModel, prismicSize } }) => {
 
 export default ProductsPage
 export const pageQuery = graphql`
-  query modelQuery($uid: String) {
-    prismicSize(data: { parent_model: { uid: { eq: $uid } } }) {
-      uid
-      id
-      data {
-        product_size_name {
-          html
-          text
-        }
-        body {
-          ... on PrismicSizeBodyDocumentation {
-            id
-            items {
-              attachment {
-                url
-                target
-                size
-                name
-              }
-            }
-          }
-          ... on PrismicSizeBodyPictures {
-            id
-            items {
-              product_size_image {
-                url
-                alt
-              }
-            }
-          }
-          ... on PrismicSizeBodySpecSheet {
-            id
-            items {
-              spec_name {
-                text
-              }
-              spec_value {
-                text
-              }
-            }
-          }
-        }
-      }
-    }
+  query pageQuery($uid: String) {
     prismicModel(uid: { eq: $uid }) {
       uid
       data {
@@ -109,6 +66,54 @@ export const pageQuery = graphql`
         product_name {
           html
           text
+        }
+      }
+    }
+    allPrismicSize {
+      edges {
+        node {
+          data {
+            product_size_name {
+              text
+            }
+            spare_parts {
+              text
+            }
+            parent_model {
+              uid
+            }
+            body {
+              ... on PrismicSizeBodyDocumentation {
+                id
+                items {
+                  attachment {
+                    url
+                    name
+                  }
+                }
+              }
+              ... on PrismicSizeBodyPictures {
+                id
+                items {
+                  product_size_image {
+                    url
+                    alt
+                  }
+                }
+              }
+              ... on PrismicSizeBodySpecSheet {
+                id
+                items {
+                  spec_name {
+                    text
+                  }
+                  spec_value {
+                    text
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

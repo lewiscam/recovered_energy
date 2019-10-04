@@ -48,7 +48,7 @@ const Header = ({ siteTitle }) => {
             Products
           </Link>
           {data.allPrismicModel.nodes.map((item, key) => (
-            <Link to={item.uid} key={key}>
+            <Link to={"/products/" + item.uid} key={key}>
               {item.uid}
             </Link>
           ))}
