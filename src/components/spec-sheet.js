@@ -1,28 +1,24 @@
-import React, { useState } from "react"
-import { Table, Box, TableCell, TableRow, TableBody } from "grommet"
-import { graphql } from "gatsby"
+import React from "react"
+import { Table } from "semantic-ui-react"
 
 const SpecSheet = props => {
   function displaySpecs(size) {
-    console.log(size.items)
     return size.items.map((specs, index) => {
       return (
-        <TableRow key={specs.spec_name.text}>
-          <TableCell scope="row">
+        <Table.Row key={specs.spec_name.text}>
+          <Table.Cell>
             <strong>{specs.spec_name.text}</strong>
-          </TableCell>
-          <TableCell>{specs.spec_value.text}</TableCell>
-        </TableRow>
+          </Table.Cell>
+          <Table.Cell>{specs.spec_value.text}</Table.Cell>
+        </Table.Row>
       )
     })
   }
 
   return (
-    <Box pad="medium">
-      <Table>
-        <TableBody>{displaySpecs(props.size)}</TableBody>
-      </Table>
-    </Box>
+    <Table>
+      <Table.Body>{displaySpecs(props.size)}</Table.Body>
+    </Table>
   )
 }
 
