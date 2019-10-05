@@ -15,6 +15,7 @@ const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
   const sizes = allPrismicSize.edges.filter(
     element => element.node.data.parent_model.uid === prismicModel.uid
   )
+  console.log(sizes)
   const [size, setSize] = useState(allPrismicSize.edges[0])
 
   const options = sizes.map((size, key) => ({
