@@ -5,7 +5,7 @@ const SpecSheet = props => {
   function displaySpecs(size) {
     return size.items.map((specs, index) => {
       return (
-        <Table.Row key={specs.spec_name.text}>
+        <Table.Row key={index}>
           <Table.Cell>
             <strong>{specs.spec_name.text}</strong>
           </Table.Cell>

@@ -92,7 +92,11 @@ const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
           onChange={onSizeChange}
         />
       </Menu>
-      <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
+      <Tab
+        style={{ marginTop: "2rem" }}
+        menu={{ secondary: true, pointing: true, fluid: true, vertical: true }}
+        panes={panes}
+      />
     </Layout>
   )
 }
