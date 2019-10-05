@@ -2,7 +2,6 @@ import React from "react"
 import { Box, Carousel, Image } from "grommet"
 
 const Photos = props => {
-  console.log(props.size)
   return (
     <Box height="large" width="medium" pad="medium" overflow="hidden">
       <Carousel fill>

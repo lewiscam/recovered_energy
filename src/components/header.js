@@ -29,7 +29,6 @@ const Header = ({ siteTitle }) => {
           <Dropdown.Menu>
             {data.allPrismicModel.nodes.map((item, key) => (
               <Dropdown.Item key={key}>
-                {console.log(item)}
                 <Link to={"/products/" + item.uid} key={key}>
                   {item.data.product_name.text}
                 </Link>
