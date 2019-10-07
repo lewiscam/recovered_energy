@@ -1,16 +1,17 @@
 import React from "react"
-import { Box, Anchor } from "grommet"
+import { List } from "semantic-ui-react"
 
 const Documentation = props => {
-  console.log(props.size)
   return (
-    <Box width="medium" pad="medium">
+    <List>
       {props.size.items.map(item => {
         return (
-          <Anchor href={item.attachment.url}>{item.attachment.name}</Anchor>
+          <List.Item
+            content={<a href={item.attachment.url}>{item.attachment.name}</a>}
+          />
         )
       })}
-    </Box>
+    </List>
   )
 }
 

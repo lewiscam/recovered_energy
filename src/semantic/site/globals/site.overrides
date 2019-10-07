@@ -1,0 +1,9 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+@primaryColor   : @green;
+@secondaryColor : @grey;
+
+@green: #66bc7d;
+@grey: #333333;

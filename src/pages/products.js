@@ -6,7 +6,7 @@ import Documentation from "./../components/documentation"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
-import { Heading, Button, Menu, Tabs, Tab, Box, Select } from "grommet"
+import { Menu, Dropdown, Tab, Button, Header } from "semantic-ui-react"
 
 const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
   const model = prismicModel.data
@@ -15,41 +15,88 @@ const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
   const sizes = allPrismicSize.edges.filter(
     element => element.node.data.parent_model.uid === prismicModel.uid
   )
-  console.log(sizes)
   const [size, setSize] = useState(allPrismicSize.edges[0])
 
-  const sizesList = sizes.map(size => ({
-    label: size.node.data.product_size_name.text,
-    onClick: () => setSize(size),
+  const options = sizes.map((size, key) => ({
+    key,
+    text: size.node.data.product_size_name.text,
+    value: size.node.data.product_size_name.text,
   }))
+
   const getSlice = (size, key) => {
     return size.node.data.body.filter(element => element.__typename === key)[0]
   }
-  return (
-    <Layout>
-      <SEO title="Products" />
-      <Heading level={1}>{model.product_name.text}</Heading>
-      <Button label="Get a Quote"></Button>
-      <Menu label="Size" items={sizesList} />
-      <Tabs justify="start">
-        <Tab title="Description">
+
+  const onSizeChange = (e, data) => {
+    setSize(
+      sizes.filter(
+        size => data.value === size.node.data.product_size_name.text
+      )[0]
+    )
+  }
+
+  const panes = [
+    {
+      menuItem: "Description",
+      render: () => (
+        <Tab.Pane attached={false}>
           <Description content={model.product_description.html} />
-        </Tab>
-        <Tab title="Specifications">
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: "Specifications",
+      render: () => (
+        <Tab.Pane attached={false}>
           <SpecSheet size={getSlice(size, "PrismicSizeBodySpecSheet")} />
-        </Tab>
-        <Tab title="Documentation">
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: "Documentation",
+      render: () => (
+        <Tab.Pane attached={false}>
           <Documentation
             size={getSlice(size, "PrismicSizeBodyDocumentation")}
           />
-        </Tab>
-        <Tab title="Photos">
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: "Photos",
+      render: () => (
+        <Tab.Pane attached={false}>
           <Photos size={getSlice(size, "PrismicSizeBodyPictures")} />
-        </Tab>
-        <Tab title="Spare Parts">
-          <Box pad="medium">Spare Parts list goes here</Box>
-        </Tab>
-      </Tabs>
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: "Spare Parts",
+      render: () => (
+        <Tab.Pane attached={false}>Spare Parts list goes here</Tab.Pane>
+      ),
+    },
+  ]
+
+  return (
+    <Layout>
+      <SEO title="Products" />
+      <Header as="h1">{model.product_name.text}</Header>
+      <Button content="Get a Quote" primary />
+      <Menu compact>
+        <Dropdown
+          text="Sizes"
+          options={options}
+          simple
+          item
+          onChange={onSizeChange}
+        />
+      </Menu>
+      <Tab
+        style={{ marginTop: "2rem" }}
+        menu={{ secondary: true, pointing: true, fluid: true, vertical: true }}
+        panes={panes}
+      />
     </Layout>
   )
 }
