@@ -10,17 +10,15 @@ import SEO from "../components/seo"
 import { graphql } from "gatsby"
 import { Menu, Dropdown, Tab, Button, Header, Image } from "semantic-ui-react"
 
-
 const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
   const model = prismicModel.data
 
   //TODO: do this filter in the query
-  const sizes = allPrismicSize.edges.filter(
+  const allSizes = allPrismicSize.edges.filter(
     element => element.node.data.parent_model.uid === prismicModel.uid
   )
-  const [size, setSize] = useState(allPrismicSize.edges[0])
-console.log("size", size)
-  const options = sizes.map((size, key) => ({
+  const [selectedSize, setSelectedSize] = useState(allPrismicSize.edges[0])
+  const options = allSizes.map((size, key) => ({
     key,
     text: size.node.data.product_size_name.text,
     value: size.node.data.product_size_name.text,
@@ -31,13 +29,12 @@ console.log("size", size)
   }
 
   const onSizeChange = (e, data) => {
-    setSize(
-      sizes.filter(
+    setSelectedSize(
+      allSizes.filter(
         size => data.value === size.node.data.product_size_name.text
       )[0]
     )
   }
-
 
   const panes = [
     {
@@ -52,7 +49,9 @@ console.log("size", size)
       menuItem: "Specifications",
       render: () => (
         <Tab.Pane attached={false}>
-          <SpecSheet size={getSlice(size, "PrismicSizeBodySpecSheet")} />
+          <SpecSheet
+            specs={getSlice(selectedSize, "PrismicSizeBodySpecSheet")}
+          />
         </Tab.Pane>
       ),
     },
@@ -61,7 +60,10 @@ console.log("size", size)
       render: () => (
         <Tab.Pane attached={false}>
           <Documentation
-            size={getSlice(size, "PrismicSizeBodyDocumentation")}
+            documentation={getSlice(
+              selectedSize,
+              "PrismicSizeBodyDocumentation"
+            )}
           />
         </Tab.Pane>
       ),
@@ -70,7 +72,7 @@ console.log("size", size)
       menuItem: "Photos",
       render: () => (
         <Tab.Pane attached={false}>
-          <Photos size={getSlice(size, "PrismicSizeBodyPictures")} />
+          <Photos photos={getSlice(selectedSize, "PrismicSizeBodyPictures")} />
         </Tab.Pane>
       ),
     },
@@ -78,8 +80,8 @@ console.log("size", size)
       menuItem: "Spare Parts",
       render: () => (
         <Tab.Pane attached={false}>
-          <Spares size={size.node.data}/>
-          </Tab.Pane>
+          <Spares spareParts={selectedSize.node.data} />
+        </Tab.Pane>
       ),
     },
   ]
@@ -88,8 +90,10 @@ console.log("size", size)
     <Layout>
       <SEO title="Products" />
       <Header as="h1">{model.product_name.text}</Header>
-      <Header as="h2">Size: {size.node.data.product_size_name.text}</Header>
-      <MainImage size={getSlice(size, "PrismicSizeBodyPictures")} />
+      <Header as="h2">
+        Size: {selectedSize.node.data.product_size_name.text}
+      </Header>
+      <MainImage image={getSlice(selectedSize, "PrismicSizeBodyPictures")} />
       <Button content="Get a Quote" primary />
       <Menu compact>
         <Dropdown
