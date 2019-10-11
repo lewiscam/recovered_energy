@@ -8,7 +8,7 @@ import MainImage from "./../components/main-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
-import { Menu, Dropdown, Tab, Button, Header, Image } from "semantic-ui-react"
+import { Menu, Dropdown, Tab, Button, Header } from "semantic-ui-react"
 
 
 const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
@@ -19,7 +19,7 @@ const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
     element => element.node.data.parent_model.uid === prismicModel.uid
   )
   const [size, setSize] = useState(allPrismicSize.edges[0])
-console.log("size", size)
+
   const options = sizes.map((size, key) => ({
     key,
     text: size.node.data.product_size_name.text,
@@ -91,6 +91,7 @@ console.log("size", size)
       <Header as="h2">Size: {size.node.data.product_size_name.text}</Header>
       <MainImage size={getSlice(size, "PrismicSizeBodyPictures")} />
       <Button content="Get a Quote" primary />
+
       <Menu compact>
         <Dropdown
           text="Sizes"
@@ -102,7 +103,7 @@ console.log("size", size)
       </Menu>
       <Tab
         style={{ marginTop: "2rem" }}
-        menu={{ secondary: true, pointing: true, fluid: true, vertical: true }}
+        menu={{ secondary: true, pointing: true, fluid: true, vertical: false }}
         panes={panes}
       />
     </Layout>
