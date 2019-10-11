@@ -10,6 +10,7 @@ import SEO from "../components/seo"
 import { graphql } from "gatsby"
 import { Menu, Dropdown, Tab, Button, Header, Image } from "semantic-ui-react"
 
+
 const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
   const model = prismicModel.data
 
@@ -35,6 +36,7 @@ const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
       )[0]
     )
   }
+
 
   const panes = [
     {
@@ -95,6 +97,7 @@ const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
       </Header>
       <MainImage image={getSlice(selectedSize, "PrismicSizeBodyPictures")} />
       <Button content="Get a Quote" primary />
+
       <Menu compact>
         <Dropdown
           text="Sizes"
