@@ -4,7 +4,7 @@ import { Image } from "semantic-ui-react"
 const Photos = props => {
   return (
     <>
-      {props.size.items.map(item => {
+      {props.photos.items.map(item => {
         return (
           <Image
             fit="cover"

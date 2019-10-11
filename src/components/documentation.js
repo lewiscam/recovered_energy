@@ -5,7 +5,7 @@ const Documentation = props => {
   console.log(props.size)
   return (
     <List>
-      {props.size.items.map(item => {
+      {props.documentation.items.map(item => {
         return (
           <List.Item
             content={<a href={item.attachment.url}>{item.attachment.name}</a>}
