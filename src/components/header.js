@@ -44,6 +44,9 @@ const Header = ({ siteTitle }) => {
               ))}
             </Dropdown.Menu>
           </Dropdown>
+          <Menu.Item>
+            <Link to="/contact">Contact Us</Link>
+          </Menu.Item>
         </Menu.Menu>
       </Menu>
     </header>
