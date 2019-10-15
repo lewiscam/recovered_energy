@@ -9,6 +9,8 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import "semantic-ui-less/semantic.less"
+import "./layout.less"
+import { Container } from "semantic-ui-react"
 
 import Header from "./header"
 
@@ -34,7 +36,9 @@ const Layout = ({ children }) => {
           paddingTop: 0,
         }}
       >
-        <main>{children}</main>
+        <Container>
+          <main>{children}</main>
+        </Container>
         <footer></footer>
       </div>
     </>
