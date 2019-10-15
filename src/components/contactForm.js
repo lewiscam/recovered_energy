@@ -3,7 +3,7 @@ import { Form, Button } from "semantic-ui-react"
 
 const ContactForm = () => {
   return (
-    <Form name="contact" method="post" data-netlify="true">
+    <Form name="contact" method="post" action="/success" data-netlify="true">
       <Form.Input
         fluid
         label="First name"
