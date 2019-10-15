@@ -8,7 +8,15 @@ import MainImage from "./../components/main-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
-import { Menu, Dropdown, Tab, Button, Header, Image } from "semantic-ui-react"
+import {
+  Menu,
+  Dropdown,
+  Tab,
+  Button,
+  Header,
+  Grid,
+  Container,
+} from "semantic-ui-react"
 
 const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
   const model = prismicModel.data
@@ -88,27 +96,53 @@ const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
 
   return (
     <Layout>
-      <SEO title="Products" />
-      <Header as="h1">{model.product_name.text}</Header>
-      <Header as="h2">
-        Size: {selectedSize.node.data.product_size_name.text}
-      </Header>
-      <MainImage image={getSlice(selectedSize, "PrismicSizeBodyPictures")} />
-      <Button content="Get a Quote" primary />
-      <Menu compact>
-        <Dropdown
-          text="Sizes"
-          options={options}
-          simple
-          item
-          onChange={onSizeChange}
-        />
-      </Menu>
-      <Tab
-        style={{ marginTop: "2rem" }}
-        menu={{ secondary: true, pointing: true, fluid: true, vertical: true }}
-        panes={panes}
-      />
+      <Container className="main-container">
+        <SEO title="Products" />
+        <Grid stackable>
+          <Grid.Row>
+            <Grid.Column>
+              <Header as="h1">{model.product_name.text}</Header>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column>
+              <Header as="h2">
+                Size: {selectedSize.node.data.product_size_name.text}
+              </Header>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column>
+              <Button content="Get a Quote" primary />
+              <Dropdown
+                text="Sizes"
+                options={options}
+                onChange={onSizeChange}
+                button
+              />
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row columns={2}>
+            <Grid.Column width={4}>
+              <MainImage
+                image={getSlice(selectedSize, "PrismicSizeBodyPictures")}
+              />
+            </Grid.Column>
+            <Grid.Column width={12}>
+              <Tab
+                style={{ marginTop: "2rem" }}
+                menu={{
+                  secondary: true,
+                  pointing: true,
+                  fluid: true,
+                  vertical: true,
+                }}
+                panes={panes}
+              />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
     </Layout>
   )
 }

@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import React, { useState } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { Menu, Dropdown } from "semantic-ui-react"
+import Image from "./image"
 
 const Header = ({ siteTitle }) => {
   const data = useStaticQuery(graphql`
@@ -21,24 +22,32 @@ const Header = ({ siteTitle }) => {
   `)
   return (
     <header>
-      <Menu secondary>
+      <Menu primary>
         <Menu.Item>
-          <Link to="/">{siteTitle}</Link>
+          <Link to="/">
+            <Image />
+          </Link>
         </Menu.Item>
-        <Dropdown text="Products" className="link item">
-          <Dropdown.Menu>
-            {data.allPrismicModel.nodes.map((item, key) => (
-              <Dropdown.Item key={key}>
+        <Menu.Menu position="right">
+          <Menu.Item>
+            <Link to="/about-us">About Us</Link>
+          </Menu.Item>
+
+          <Dropdown text="Products" className="link item">
+            <Dropdown.Menu>
+              {data.allPrismicModel.nodes.map((item, key) => (
                 <Link to={"/products/" + item.uid} key={key}>
-                  {item.data.product_name.text}
+                  <Dropdown.Item key={key}>
+                    {item.data.product_name.text}
+                  </Dropdown.Item>
                 </Link>
-              </Dropdown.Item>
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
-        <Menu.Item>
-          <Link to="/contact">Contact Us</Link>
-        </Menu.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+          <Menu.Item>
+            <Link to="/contact">Contact Us</Link>
+          </Menu.Item>
+        </Menu.Menu>
       </Menu>
     </header>
   )
