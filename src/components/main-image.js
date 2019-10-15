@@ -5,7 +5,6 @@ const MainImage = props => {
   return (
     <Image
       size="medium"
-      bordered
       floated="left"
       fit="cover"
       src={props.image.items[0].product_size_image.url}
