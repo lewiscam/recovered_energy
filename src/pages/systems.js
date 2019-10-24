@@ -19,20 +19,20 @@ const Systems = ({ data: { allPrismicSystemCategory } }) => {
 export default Systems
 
 export const systemsQuery = graphql`
-         query SystemsQuery {
-           allPrismicSystemCategory {
-             edges {
-               node {
-                 data {
-                   system_category_image {
-                     url
-                   }
-                   system_category_title {
-                     text
-                   }
-                 }
-               }
-             }
-           }
-         }
-       `
+  query SystemsQuery {
+    allPrismicSystemCategory {
+      edges {
+        node {
+          data {
+            system_category_image {
+              url
+            }
+            system_category_title {
+              text
+            }
+          }
+        }
+      }
+    }
+  }
+`
