@@ -3,15 +3,38 @@ import { Link } from "gatsby"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { Container } from "semantic-ui-react"
-const Systems = ({ data: { allPrismicSystemCategory } }) => {
-  const systemsData = allPrismicSystemCategory.edges[0].node.data
+import { Container, Image, Grid} from "semantic-ui-react"
+const Systems =  ({ data: { allPrismicModel } }) => {
+  const allProducts = allPrismicModel.edges
+
+
+const displayProduct =
+ allProducts.map(product => {
+     return (
+       <Grid.Column className="main-container">
+         <Link to={"/products/" + product.node.uid} key={product.node.uid}>
+           <h2>{product.node.data.product_name.text}</h2>
+           <Image src={product.node.data.model_feature_image.url} />
+         </Link>
+       </Grid.Column>
+     )
+ });
+const currentSystemCategory =
+allProducts.filter(currentCategory =>
+    currentCategory.node.data.system_category.document[0].uid === window.history.state.item.uid
+    )
+
+
+
+console.log("currentSystemCategory", currentSystemCategory)
 
   return (
     <Layout>
-      <Container text className="main-container">
-        <h1>{systemsData.system_category_title.text}</h1>
-      </Container>
+      <Grid>
+        <Grid.Row columns={4}>
+      {displayProduct}
+        </Grid.Row>
+      </Grid>
     </Layout>
   )
 }
@@ -19,20 +42,33 @@ const Systems = ({ data: { allPrismicSystemCategory } }) => {
 export default Systems
 
 export const systemsQuery = graphql`
-  query SystemsQuery {
-    allPrismicSystemCategory {
-      edges {
-        node {
-          data {
-            system_category_image {
-              url
-            }
-            system_category_title {
-              text
-            }
-          }
-        }
-      }
-    }
-  }
-`
+         query getProducts {
+           allPrismicModel {
+             edges {
+               node {
+                 data {
+                   model_feature_image {
+                     url
+                   }
+                   product_name {
+                     text
+                   }
+                   system_category {
+                     document {
+                       data {
+                         system_category_title {
+                           text
+                         }
+                       }
+                     }
+                   }
+                 }
+                 uid
+               }
+             }
+           }
+         }
+       `
+
+
+
