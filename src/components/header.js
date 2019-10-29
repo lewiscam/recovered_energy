@@ -18,6 +18,16 @@ const Header = ({ siteTitle }) => {
           }
         }
       }
+      allPrismicSystemCategory {
+        nodes {
+          uid
+          data {
+            system_category_title {
+              text
+            }
+          }
+        }
+      }
     }
   `)
   return (
@@ -47,6 +57,24 @@ const Header = ({ siteTitle }) => {
           <Menu.Item>
             <Link to="/contact">Contact Us</Link>
           </Menu.Item>
+          <Dropdown text="Systems" className="link item">
+            <Dropdown.Menu>
+              {data.allPrismicSystemCategory.nodes.map((item, key) => (
+              
+                <Link 
+                to="/systems"
+                key={key}
+                state={{item}}
+
+              >
+                  <Dropdown.Item key={key}>
+
+                    {item.data.system_category_title.text}
+                  </Dropdown.Item>
+                </Link>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
         </Menu.Menu>
       </Menu>
     </header>
