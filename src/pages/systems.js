@@ -19,14 +19,16 @@ const displayProduct =
        </Grid.Column>
      )
  });
-const currentSystemCategory =
-allProducts.filter(currentCategory =>
-    currentCategory.node.data.system_category.document[0].uid === window.history.state.item.uid
-    )
+
+ ////// not using yet. still working on getting this to work ///////
+// const currentSystemCategory =
+// allProducts.filter(currentCategory =>
+//     currentCategory.node.data.system_category.document[0].uid === window.history.state.item.uid
+//     )
 
 
 
-console.log("currentSystemCategory", currentSystemCategory)
+
 
   return (
     <Layout>

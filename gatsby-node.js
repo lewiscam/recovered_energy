@@ -28,7 +28,7 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `)
-  const template = path.resolve("src/pages/products.js")
+  let template = path.resolve("src/pages/products.js")
   pages.data.allPrismicModel.edges.forEach(edge => {
     createPage({
       path: `/products/${edge.node.uid}`,
