@@ -13,6 +13,7 @@ import "./layout.less"
 import { Container } from "semantic-ui-react"
 
 import Header from "./header"
+import Footer from "./footer"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -39,8 +40,8 @@ const Layout = ({ children }) => {
         <Container>
           <main>{children}</main>
         </Container>
-        <footer></footer>
       </div>
+      <Footer />
     </>
   )
 }
