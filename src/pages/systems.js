@@ -42,6 +42,7 @@ export const systemsQuery = graphql`
     allPrismicModel {
       edges {
         node {
+          uid
           data {
             model_feature_image {
               url
