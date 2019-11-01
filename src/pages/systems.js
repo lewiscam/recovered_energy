@@ -4,8 +4,10 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { Container, Image, Grid } from "semantic-ui-react"
-const Systems = ({ data: { allPrismicModel } }) => {
-  const allProducts = allPrismicModel.edges
+const Systems = ({ pageContext, data: { allPrismicModel } }) => {
+  const allProducts = allPrismicModel.edges.filter(
+    edge => edge.node.data.system_category.uid === pageContext.uid
+  )
 
   const displayProduct = allProducts.map(product => {
     return (
