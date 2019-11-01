@@ -60,15 +60,8 @@ const Header = ({ siteTitle }) => {
           <Dropdown text="Systems" className="link item">
             <Dropdown.Menu>
               {data.allPrismicSystemCategory.nodes.map((item, key) => (
-              
-                <Link 
-                to="/systems"
-                key={key}
-                state={{item}}
-
-              >
+                <Link to={"/systems/" + item.uid} key={key} state={{ item }}>
                   <Dropdown.Item key={key}>
-
                     {item.data.system_category_title.text}
                   </Dropdown.Item>
                 </Link>
