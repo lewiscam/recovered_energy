@@ -36,8 +36,8 @@ const Systems = ({ data: { allPrismicModel } }) => {
 export default Systems
 
 export const systemsQuery = graphql`
-  query getProducts($uid: String) {
-    allPrismicModel(filter: {data: { system_category: { uid: { eq: $uid}}}}) ) {
+  query getProducts {
+    allPrismicModel {
       edges {
         node {
           data {
