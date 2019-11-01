@@ -3,7 +3,15 @@ import { Form, Button } from "semantic-ui-react"
 
 const ContactForm = () => {
   return (
-    <Form name="contact" method="post" action="/success" data-netlify="true">
+    <Form
+      name="contact"
+      method="post"
+      action="/success"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+    >
+      <input type="hidden" name="bot-field" />
+      <input type="hidden" name="form-name" value="contact" />
       <Form.Input
         fluid
         label="First name"
