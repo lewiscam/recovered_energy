@@ -26,6 +26,7 @@ const ContactForm = () => {
         placeholder="Last name"
         required
       />
+      <Form.Input fluid label="Company" name="company" placeholder="Company" />
       <Form.Input
         fluid
         label="Phone Number"
