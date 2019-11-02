@@ -53,7 +53,6 @@ const Header = ({ siteTitle }) => {
                 </Link>
               ))}
             </Dropdown.Menu>
-            //{" "}
           </Dropdown>
           <Menu.Item>
             <Link to="/contact">Contact Us</Link>

@@ -32,7 +32,7 @@ describe("Header", () => {
     }))
   })
   it("renders correctly", () => {
-    const tree = render(<Header />)
+    const tree = shallow(<Header />)
     expect(tree).toMatchSnapshot()
   })
 })
