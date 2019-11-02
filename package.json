@@ -3,7 +3,7 @@
   "private": true,
   "description": "A Website for Recovered Energy",
   "version": "0.1.0",
-  "author": "Cam Lewis",
+  "author": "Cam Lewis/Tyler Lewis",
   "dependencies": {
     "gatsby": "2.13.25",
     "gatsby-image": "^2.2.19",
