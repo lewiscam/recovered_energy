@@ -26,9 +26,14 @@
     "styled-components": "^4.3.2"
   },
   "devDependencies": {
+    "@testing-library/cypress": "^5.0.2",
+    "axe-core": "^3.4.0",
+    "cypress": "^3.6.0",
+    "cypress-axe": "^0.5.1",
     "dotenv": "^8.1.0",
     "less-loader": "^5.0.0",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "start-server-and-test": "^1.10.6"
   },
   "keywords": [
     "gatsby"
@@ -40,7 +45,13 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \""
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \"",
+    "predeploy": "CI=1 npm i cypress; npm test",
+    "deploy": "npm run build",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "test:e2e": "start-server-and-test develop http://localhost:8000 cy:open",
+    "test:e2e:ci": "start-server-and-test develop http://localhost:8000 cy:run"
   },
   "repository": {
     "type": "git",

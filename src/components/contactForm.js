@@ -14,19 +14,19 @@ const ContactForm = () => {
       <input type="hidden" name="form-name" value="contact" />
       <Form.Input
         fluid
-        label="First name"
-        name="firstName"
-        placeholder="First name"
+        label="Name"
+        name="name"
+        placeholder="Name"
         required
+        id="contact-name"
       />
       <Form.Input
         fluid
-        label="Last name"
-        name="lastName"
-        placeholder="Last name"
-        required
+        label="Company"
+        name="company"
+        placeholder="Company"
+        id="contact-company"
       />
-      <Form.Input fluid label="Company" name="company" placeholder="Company" />
       <Form.Input
         fluid
         label="Phone Number"
@@ -34,6 +34,7 @@ const ContactForm = () => {
         placeholder="(XXX) XXX-XXXX"
         type="tel"
         required
+        id="contact-phone"
       />
       <Form.Input
         fluid
@@ -42,12 +43,14 @@ const ContactForm = () => {
         placeholder="example@mail.com"
         type="email"
         required
+        id="contact-email"
       />
       <Form.TextArea
         label="Message"
         name="message"
         placeholder="Send us a message..."
         required
+        id="contact-message"
       />
       <Button type="submit" primary>
         Submit
