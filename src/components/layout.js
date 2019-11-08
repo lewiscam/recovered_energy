@@ -14,6 +14,7 @@ import { Container } from "semantic-ui-react"
 
 import Header from "./header"
 import Footer from "./footer"
+import Masthead from "./masthead"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -29,10 +30,11 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header siteTitle={data.site.siteMetadata.title} />
+      {window.location.pathname === "/" ? <Masthead /> : null}
       <div
         style={{
           margin: `2rem auto 0`,
-          maxWidth: 960,
+          maxWidth: 1024,
           padding: `0px 1.0875rem 1.45rem`,
           paddingTop: 0,
         }}
