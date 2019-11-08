@@ -43,7 +43,7 @@ const Header = ({ siteTitle }) => {
             <Link to="/about-us">About Us</Link>
           </Menu.Item>
 
-          <Dropdown text="Products" className="link item">
+          <Dropdown text="Products" className="link item" aria-label="Products">
             <Dropdown.Menu>
               {data.allPrismicModel.nodes.map((item, key) => (
                 <Link to={"/products/" + item.uid} key={key}>
@@ -57,7 +57,7 @@ const Header = ({ siteTitle }) => {
           <Menu.Item>
             <Link to="/contact">Contact Us</Link>
           </Menu.Item>
-          <Dropdown text="Systems" className="link item">
+          <Dropdown text="Systems" className="link item" aria-label="Systems">
             <Dropdown.Menu>
               {data.allPrismicSystemCategory.nodes.map((item, key) => (
                 <Link to={"/systems/" + item.uid} key={key} state={{ item }}>
