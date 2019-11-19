@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "recovered-energy",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "A Website for Recovered Energy",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Cam Lewis/Tyler Lewis",
   "dependencies": {
     "gatsby": "2.13.25",
     "gatsby-image": "^2.2.19",
@@ -26,13 +26,22 @@
     "styled-components": "^4.3.2"
   },
   "devDependencies": {
+    "babel-jest": "^24.9.0",
+    "babel-preset-gatsby": "^0.2.20",
     "@testing-library/cypress": "^5.0.2",
     "axe-core": "^3.4.0",
     "cypress": "^3.6.0",
     "cypress-axe": "^0.5.1",
     "dotenv": "^8.1.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-15": "^1.4.1",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "enzyme-to-json": "^3.4.3",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.9.0",
     "less-loader": "^5.0.0",
     "prettier": "^1.18.2",
+    "react-test-renderer": "^16.11.0",
     "start-server-and-test": "^1.10.6"
   },
   "keywords": [
@@ -45,7 +54,8 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \"",
+    "test": "jest",
+    "build:prod": "npm run test && npm run build",
     "predeploy": "CI=1 npm i cypress; npm test",
     "deploy": "npm run build",
     "cy:open": "cypress open",

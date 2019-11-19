@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header renders correctly 1`] = `
+<header>
+  <Menu
+    primary={true}
+  >
+    <MenuItem>
+      <mockConstructor
+        to="/"
+      >
+        <Image />
+      </mockConstructor>
+    </MenuItem>
+    <MenuMenu
+      position="right"
+    >
+      <MenuItem>
+        <mockConstructor
+          to="/about-us"
+        >
+          About Us
+        </mockConstructor>
+      </MenuItem>
+      <Dropdown
+        additionLabel="Add "
+        additionPosition="top"
+        className="link item"
+        closeOnBlur={true}
+        closeOnEscape={true}
+        deburr={false}
+        icon="dropdown"
+        minCharacters={1}
+        noResultsMessage="No results found."
+        openOnFocus={true}
+        renderLabel={[Function]}
+        searchInput="text"
+        selectOnBlur={true}
+        selectOnNavigation={true}
+        text="Products"
+        wrapSelection={true}
+      >
+        <DropdownMenu>
+          <mockConstructor
+            key="0"
+            to="/products/model1"
+          >
+            <DropdownItem
+              key="0"
+            >
+              Model 1
+            </DropdownItem>
+          </mockConstructor>
+        </DropdownMenu>
+      </Dropdown>
+      <MenuItem>
+        <mockConstructor
+          to="/contact"
+        >
+          Contact Us
+        </mockConstructor>
+      </MenuItem>
+      <Dropdown
+        additionLabel="Add "
+        additionPosition="top"
+        className="link item"
+        closeOnBlur={true}
+        closeOnEscape={true}
+        deburr={false}
+        icon="dropdown"
+        minCharacters={1}
+        noResultsMessage="No results found."
+        openOnFocus={true}
+        renderLabel={[Function]}
+        searchInput="text"
+        selectOnBlur={true}
+        selectOnNavigation={true}
+        text="Systems"
+        wrapSelection={true}
+      >
+        <DropdownMenu>
+          <mockConstructor
+            key="0"
+            state={
+              Object {
+                "item": Object {
+                  "data": Object {
+                    "system_category_title": Object {
+                      "text": "System Category 1",
+                    },
+                  },
+                  "uid": "systemCat1",
+                },
+              }
+            }
+            to="/systems/systemCat1"
+          >
+            <DropdownItem
+              key="0"
+            >
+              System Category 1
+            </DropdownItem>
+          </mockConstructor>
+        </DropdownMenu>
+      </Dropdown>
+    </MenuMenu>
+  </Menu>
+</header>
+`;
