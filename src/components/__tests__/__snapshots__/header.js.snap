@@ -25,6 +25,7 @@ exports[`Header renders correctly 1`] = `
       <Dropdown
         additionLabel="Add "
         additionPosition="top"
+        aria-label="Products"
         className="link item"
         closeOnBlur={true}
         closeOnEscape={true}
@@ -63,6 +64,7 @@ exports[`Header renders correctly 1`] = `
       <Dropdown
         additionLabel="Add "
         additionPosition="top"
+        aria-label="Systems"
         className="link item"
         closeOnBlur={true}
         closeOnEscape={true}
