@@ -27,7 +27,7 @@ const IndexPage = () => {
 
   const systemCategories = data.allPrismicSystemCategory.nodes
   return (
-    <Layout>
+    <Layout showMasthead={true}>
       <SEO title="Home" />
       <Card.Group>
         {systemCategories.map((system, key) => {
