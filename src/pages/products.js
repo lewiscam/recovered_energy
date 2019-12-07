@@ -9,13 +9,14 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
 import {
-  Menu,
   Dropdown,
   Tab,
   Button,
   Header,
   Grid,
   Container,
+  Segment,
+  Item,
 } from "semantic-ui-react"
 
 const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
@@ -98,50 +99,42 @@ const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
     <Layout>
       <Container className="main-container">
         <SEO title="Products" />
-        <Grid stackable>
-          <Grid.Row>
-            <Grid.Column>
-              <Header as="h1">{model.product_name.text}</Header>
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column>
-              <Header as="h2">
-                Size: {selectedSize.node.data.product_size_name.text}
-              </Header>
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column>
-              <Button content="Get a Quote" primary />
-              <Dropdown
-                text="Sizes"
-                options={options}
-                onChange={onSizeChange}
-                button
-              />
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row columns={2}>
-            <Grid.Column width={4}>
-              <MainImage
-                image={getSlice(selectedSize, "PrismicSizeBodyPictures")}
-              />
-            </Grid.Column>
-            <Grid.Column width={12}>
-              <Tab
-                style={{ marginTop: "2rem" }}
-                menu={{
-                  secondary: true,
-                  pointing: true,
-                  fluid: true,
-                  vertical: true,
-                }}
-                panes={panes}
-              />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+        <Item.Group>
+          <Item>
+            <Item.Image
+              size="small"
+              src={
+                getSlice(selectedSize, "PrismicSizeBodyPictures").items[0]
+                  .product_size_image.url
+              }
+            />
+
+            <Item.Content>
+              <Item.Header as="h1">{model.product_name.text}</Item.Header>
+              <Item.Description>
+                <Header as="h2">
+                  Size: {selectedSize.node.data.product_size_name.text}
+                </Header>
+                <Button content="Get a Quote" primary />
+                <Dropdown
+                  text="Sizes"
+                  options={options}
+                  onChange={onSizeChange}
+                  button
+                />
+              </Item.Description>
+            </Item.Content>
+          </Item>
+        </Item.Group>
+        <Tab
+          style={{ marginTop: "2rem" }}
+          menu={{
+            secondary: true,
+            pointing: true,
+            fluid: true,
+          }}
+          panes={panes}
+        />
       </Container>
     </Layout>
   )
