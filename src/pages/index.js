@@ -1,18 +1,55 @@
 import React from "react"
-import { Link } from "gatsby"
+import { useStaticQuery, Link, graphql } from "gatsby"
+import { Card, Image } from "semantic-ui-react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}></div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+const IndexPage = () => {
+  const data = useStaticQuery(graphql`
+    query mastheadData {
+      allPrismicSystemCategory {
+        nodes {
+          uid
+          data {
+            system_category_title {
+              text
+            }
+            system_category_image {
+              url
+              alt
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  const systemCategories = data.allPrismicSystemCategory.nodes
+  return (
+    <Layout showMasthead={true}>
+      <SEO title="Home" />
+      <Card.Group>
+        {systemCategories.map((system, key) => {
+          return (
+            <Card style={{ width: "200px" }}>
+              <Image
+                src={system.data.system_category_image.url}
+                alt={system.data.system_category_image.alt}
+              />
+              <Card.Content>
+                <Card.Header>
+                  <Link to={"/systems/" + system.uid} key={key}>
+                    {system.data.system_category_title.text}
+                  </Link>
+                </Card.Header>
+              </Card.Content>
+            </Card>
+          )
+        })}
+      </Card.Group>
+    </Layout>
+  )
+}
 
 export default IndexPage
