@@ -1,5 +1,5 @@
 import React from "react"
-import { Table } from "semantic-ui-react"
+import { Table, Button } from "semantic-ui-react"
 
 const SpecSheet = props => {
   function displaySpecs(specs) {
@@ -16,9 +16,17 @@ const SpecSheet = props => {
   }
 
   return (
-    <Table>
-      <Table.Body>{displaySpecs(props.specs)}</Table.Body>
-    </Table>
+    <>
+      <Button
+        content="Print"
+        icon="print"
+        labelPosition="left"
+        onClick={() => window.print()}
+      />
+      <Table>
+        <Table.Body>{displaySpecs(props.specs)}</Table.Body>
+      </Table>
+    </>
   )
 }
 
