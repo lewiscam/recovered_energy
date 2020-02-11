@@ -10,6 +10,28 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const pages = await graphql(`
     {
+      allShopifyProduct(sort: { fields: [title] }) {
+        edges {
+          node {
+            title
+            images {
+              originalSrc
+            }
+            shopifyId
+            handle
+            description
+            availableForSale
+            priceRange {
+              maxVariantPrice {
+                amount
+              }
+              minVariantPrice {
+                amount
+              }
+            }
+          }
+        }
+      }
       allPrismicModel {
         edges {
           node {
@@ -28,23 +50,30 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `)
-  let template = path.resolve("src/pages/products.js")
   pages.data.allPrismicModel.edges.forEach(edge => {
     createPage({
       path: `/products/${edge.node.uid}`,
-      component: template,
+      component: path.resolve("src/pages/products.js"),
       context: {
         uid: edge.node.uid,
       },
     })
   })
-  template = path.resolve("src/pages/systems.js")
   pages.data.allPrismicSystemCategory.edges.forEach(edge => {
     createPage({
       path: `/systems/${edge.node.uid}`,
-      component: template,
+      component: path.resolve("src/pages/systems.js"),
       context: {
         uid: edge.node.uid,
+      },
+    })
+  })
+  pages.data.allShopifyProduct.edges.forEach(({ node }) => {
+    createPage({
+      path: `/part/${node.handle}`,
+      component: path.resolve(`src/pages/part.js`),
+      context: {
+        product: node,
       },
     })
   })
