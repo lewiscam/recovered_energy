@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { Container, Image, Grid } from "semantic-ui-react"
+import { Container, Image, Grid, Card } from "semantic-ui-react"
 const Systems = ({ pageContext, data: { allPrismicModel } }) => {
   const allProducts = allPrismicModel.edges.filter(
     edge => edge.node.data.system_category.uid === pageContext.uid
@@ -11,12 +11,20 @@ const Systems = ({ pageContext, data: { allPrismicModel } }) => {
 
   const displayProduct = allProducts.map(product => {
     return (
-      <Grid.Column className="main-container">
-        <Link to={"/products/" + product.node.uid} key={product.node.uid}>
-          <h2>{product.node.data.product_name.text}</h2>
-          <Image src={product.node.data.model_feature_image.url} />
-        </Link>
-      </Grid.Column>
+      <Card>
+        <Image
+          src={product.node.data.model_feature_image.url}
+          wrapped
+          ui={false}
+        />
+        <Card.Content>
+          <Card.Header>
+            <Link to={"/products/" + product.node.uid} key={product.node.uid}>
+              <h2>{product.node.data.product_name.text}</h2>
+            </Link>
+          </Card.Header>
+        </Card.Content>
+      </Card>
     )
   })
 
@@ -29,7 +37,9 @@ const Systems = ({ pageContext, data: { allPrismicModel } }) => {
   return (
     <Layout>
       <Grid>
-        <Grid.Row columns={4}>{displayProduct}</Grid.Row>
+        <Grid.Row columns={4}>
+          <Card.Group>{displayProduct}</Card.Group>
+        </Grid.Row>
       </Grid>
     </Layout>
   )
