@@ -43,6 +43,10 @@ const Header = ({ siteTitle }) => {
             <Link to="/about-us">About Us</Link>
           </Menu.Item>
 
+          <Menu.Item>
+            <Link to="/parts">Parts</Link>
+          </Menu.Item>
+
           <Dropdown text="Products" className="link item" aria-label="Products">
             <Dropdown.Menu>
               {data.allPrismicModel.nodes.map((item, key) => (

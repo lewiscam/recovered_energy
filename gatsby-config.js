@@ -43,5 +43,14 @@ module.exports = {
         linkResolver: ({ node, key, value }) => post => `/${post.uid}`,
       },
     },
+    {
+      resolve: `gatsby-source-shopify`,
+      options: {
+        // The domain name of your Shopify shop.
+        shopName: `boss-separator-parts`,
+        // The storefront access token
+        accessToken: `${process.env.SHOPIFY_API_KEY}`,
+      },
+    },
   ],
 }
