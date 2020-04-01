@@ -4,12 +4,12 @@ import { Image } from "semantic-ui-react"
 const Photos = props => {
   return (
     <>
-      {props.photos.items.map(item => {
+      {props.photos.fields.map(field => {
         return (
           <Image
             fit="cover"
-            src={item.product_size_image.url}
-            alt={item.product_size_image.alt}
+            src={field.product_size_image.url}
+            alt={field.product_size_image.alt}
           />
         )
       })}

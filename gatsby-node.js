@@ -10,61 +10,54 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const pages = await graphql(`
     {
-      allShopifyProduct(sort: { fields: [title] }) {
+      allShopifyProduct {
         edges {
           node {
-            title
-            images {
-              originalSrc
-            }
-            shopifyId
             handle
-            description
-            availableForSale
-            priceRange {
-              maxVariantPrice {
-                amount
-              }
-              minVariantPrice {
-                amount
+          }
+        }
+      }
+      prismic {
+        allModels {
+          edges {
+            node {
+              _meta {
+                id
+                uid
+                lang
               }
             }
           }
         }
-      }
-      allPrismicModel {
-        edges {
-          node {
-            id
-            uid
-          }
-        }
-      }
-      allPrismicSystemCategory {
-        edges {
-          node {
-            id
-            uid
+        allSystem_categorys {
+          edges {
+            node {
+              _meta {
+                id
+                uid
+              }
+            }
           }
         }
       }
     }
   `)
-  pages.data.allPrismicModel.edges.forEach(edge => {
+  pages.data.prismic.allModels.edges.forEach(edge => {
     createPage({
-      path: `/products/${edge.node.uid}`,
+      path: `/products/${edge.node._meta.uid}`,
       component: path.resolve("src/pages/products.js"),
       context: {
-        uid: edge.node.uid,
+        lang: edge.node._meta.lang,
+        uid: edge.node._meta.uid,
       },
     })
   })
-  pages.data.allPrismicSystemCategory.edges.forEach(edge => {
+  pages.data.prismic.allSystem_categorys.edges.forEach(edge => {
     createPage({
-      path: `/systems/${edge.node.uid}`,
+      path: `/systems/${edge.node._meta.uid}`,
       component: path.resolve("src/pages/systems.js"),
       context: {
-        uid: edge.node.uid,
+        uid: edge.node._meta.uid,
       },
     })
   })
@@ -73,7 +66,7 @@ exports.createPages = async ({ graphql, actions }) => {
       path: `/part/${node.handle}`,
       component: path.resolve(`src/templates/part.js`),
       context: {
-        product: node,
+        handle: node.handle,
       },
     })
   })
