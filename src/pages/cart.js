@@ -1,6 +1,6 @@
 import React from "react"
 
-import Cart from "../components/Cart"
+import Cart from "../components/cart"
 import Layout from "../components/layout"
 import { Container } from "semantic-ui-react"
 
