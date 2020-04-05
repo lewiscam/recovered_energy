@@ -39,7 +39,6 @@ const IndexPage = () => (
                 ) : null}
                 <Card.Content>
                   <Card.Header>
-                    {console.log(system)}
                     <Link to={"/systems/" + system.node._meta.uid} key={key}>
                       {system.node.system_category_title.text}
                     </Link>

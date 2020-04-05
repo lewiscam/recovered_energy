@@ -45,10 +45,10 @@ exports.createPages = async ({ graphql, actions }) => {
   pages.data.prismic.allModels.edges.forEach(edge => {
     createPage({
       path: `/products/${edge.node._meta.uid}`,
-      component: path.resolve("src/pages/products.js"),
+      component: path.resolve("src/templates/products.js"),
       context: {
-        lang: edge.node._meta.lang,
-        uid: edge.node._meta.uid,
+        lang: edge.node._meta.lang ? edge.node._meta.lang : "en-us",
+        uid: edge.node._meta.uid ? edge.node._meta.uid : "",
       },
     })
   })

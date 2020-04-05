@@ -12,7 +12,13 @@ const Systems = ({ pageContext, data: { prismic } }) => {
   const displayProduct = allProducts.map(product => {
     return (
       <Card>
-        <Image src={product.node.model_feature_image.url} wrapped ui={false} />
+        {product.node.model_feature_image ? (
+          <Image
+            src={product.node.model_feature_image.url}
+            wrapped
+            ui={false}
+          />
+        ) : null}
         <Card.Content>
           <Card.Header>
             <Link

@@ -2,7 +2,6 @@ import React from "react"
 import { List } from "semantic-ui-react"
 
 const Documentation = props => {
-  console.log(props.size)
   return (
     <List>
       {props.documentation.fields.map(field => {

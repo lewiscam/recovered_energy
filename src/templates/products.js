@@ -1,9 +1,9 @@
 import React, { useState } from "react"
-import SpecSheet from "./../components/spec-sheet"
-import Description from "./../components/description"
-import Photos from "./../components/photos"
-import Documentation from "./../components/documentation"
-import Spares from "./../components/spares"
+import SpecSheet from "../components/spec-sheet"
+import Description from "../components/description"
+import Photos from "../components/photos"
+import Documentation from "../components/documentation"
+import Spares from "../components/spares"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
@@ -16,7 +16,7 @@ import {
   Item,
 } from "semantic-ui-react"
 
-const ProductsPage = ({ data: { prismic } }) => {
+const ProductsTemplate = ({ data: { prismic } }) => {
   const model = prismic.model
 
   //TODO: do this filter in the query
@@ -137,9 +137,8 @@ const ProductsPage = ({ data: { prismic } }) => {
   )
 }
 
-export default ProductsPage
-export const pageQuery = graphql`
-  query pageQuery($lang: String!, $uid: String!) {
+export const productsQuery = graphql`
+  query($lang: String!, $uid: String!) {
     prismic {
       model(lang: $lang, uid: $uid) {
         _meta {
@@ -189,3 +188,5 @@ export const pageQuery = graphql`
     }
   }
 `
+
+export default ProductsTemplate
