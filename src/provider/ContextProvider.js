@@ -5,7 +5,7 @@ import Context from "../context/StoreContext"
 
 const client = Client.buildClient({
   storefrontAccessToken: process.env.SHOPIFY_API_KEY,
-  domain: `${process.env.SHOPIFY_SHOP_NAME}.myshopify.com`,
+  domain: `boss-separator-parts.myshopify.com`,
 })
 
 const ContextProvider = ({ children }) => {
