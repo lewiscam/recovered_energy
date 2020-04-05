@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 
 import StoreContext from "../context/StoreContext"
-import LineItem from "./LineItem"
+import LineItem from "./lineItem"
 import { Item, Table, Header, Button } from "semantic-ui-react"
 
 const Cart = () => {
