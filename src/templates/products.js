@@ -1,10 +1,9 @@
 import React, { useState } from "react"
-import SpecSheet from "./../components/spec-sheet"
-import Description from "./../components/description"
-import Photos from "./../components/photos"
-import Documentation from "./../components/documentation"
-import Spares from "./../components/spares"
-import MainImage from "./../components/main-image"
+import SpecSheet from "../components/spec-sheet"
+import Description from "../components/description"
+import Photos from "../components/photos"
+import Documentation from "../components/documentation"
+import Spares from "../components/spares"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
@@ -13,34 +12,32 @@ import {
   Tab,
   Button,
   Header,
-  Grid,
   Container,
-  Segment,
   Item,
 } from "semantic-ui-react"
 
-const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
-  const model = prismicModel.data
+const ProductsTemplate = ({ data: { prismic } }) => {
+  const model = prismic.model
 
   //TODO: do this filter in the query
-  const allSizes = allPrismicSize.edges.filter(
-    element => element.node.data.parent_model.uid === prismicModel.uid
+  const allSizes = prismic.allSizes.edges.filter(
+    element => element.node.parent_model._meta.uid === prismic.model._meta.uid
   )
-  const [selectedSize, setSelectedSize] = useState(allPrismicSize.edges[0])
+  const [selectedSize, setSelectedSize] = useState(prismic.allSizes.edges[0])
   const options = allSizes.map((size, key) => ({
     key,
-    text: size.node.data.product_size_name.text,
-    value: size.node.data.product_size_name.text,
+    text: size.node.product_size_name[0].text,
+    value: size.node.product_size_name[0].text,
   }))
 
   const getSlice = (size, key) => {
-    return size.node.data.body.filter(element => element.__typename === key)[0]
+    return size.node.body.filter(element => element.__typename === key)[0]
   }
 
   const onSizeChange = (e, data) => {
     setSelectedSize(
       allSizes.filter(
-        size => data.value === size.node.data.product_size_name.text
+        size => data.value === size.node.product_size_name[0].text
       )[0]
     )
   }
@@ -50,7 +47,7 @@ const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
       menuItem: "Description",
       render: () => (
         <Tab.Pane attached={false}>
-          <Description content={model.product_description.html} />
+          <Description content={model.product_description[0].text} />
         </Tab.Pane>
       ),
     },
@@ -59,7 +56,7 @@ const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
       render: () => (
         <Tab.Pane attached={false}>
           <SpecSheet
-            specs={getSlice(selectedSize, "PrismicSizeBodySpecSheet")}
+            specs={getSlice(selectedSize, "PRISMIC_SizeBodySpec_sheet")}
           />
         </Tab.Pane>
       ),
@@ -71,7 +68,7 @@ const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
           <Documentation
             documentation={getSlice(
               selectedSize,
-              "PrismicSizeBodyDocumentation"
+              "PRISMIC_SizeBodyDocumentation"
             )}
           />
         </Tab.Pane>
@@ -81,7 +78,7 @@ const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
       menuItem: "Photos",
       render: () => (
         <Tab.Pane attached={false}>
-          <Photos photos={getSlice(selectedSize, "PrismicSizeBodyPictures")} />
+          <Photos photos={getSlice(selectedSize, "PRISMIC_SizeBodyPictures")} />
         </Tab.Pane>
       ),
     },
@@ -89,7 +86,7 @@ const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
       menuItem: "Spare Parts",
       render: () => (
         <Tab.Pane attached={false}>
-          <Spares spareParts={selectedSize.node.data} />
+          <Spares spareParts={selectedSize.node} />
         </Tab.Pane>
       ),
     },
@@ -104,16 +101,16 @@ const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
             <Item.Image
               size="small"
               src={
-                getSlice(selectedSize, "PrismicSizeBodyPictures").items[0]
+                getSlice(selectedSize, "PRISMIC_SizeBodyPictures").fields[0]
                   .product_size_image.url
               }
             />
 
             <Item.Content>
-              <Item.Header as="h1">{model.product_name.text}</Item.Header>
+              <Item.Header as="h1">{model.product_name[0].text}</Item.Header>
               <Item.Description>
                 <Header as="h2">
-                  Size: {selectedSize.node.data.product_size_name.text}
+                  Size: {selectedSize.node.product_size_name[0].text}
                 </Header>
                 <Button content="Get a Quote" primary />
                 <Dropdown
@@ -140,63 +137,48 @@ const ProductsPage = ({ data: { prismicModel, allPrismicSize } }) => {
   )
 }
 
-export default ProductsPage
-export const pageQuery = graphql`
-  query pageQuery($uid: String) {
-    prismicModel(uid: { eq: $uid }) {
-      uid
-      data {
-        product_description {
-          html
-          text
+export const productsQuery = graphql`
+  query($lang: String!, $uid: String!) {
+    prismic {
+      model(lang: $lang, uid: $uid) {
+        _meta {
+          uid
         }
-        product_name {
-          html
-          text
-        }
+        product_description
+        product_name
       }
-    }
-    allPrismicSize {
-      edges {
-        node {
-          data {
-            product_size_name {
-              text
-            }
-            spare_parts {
-              text
-            }
+      allSizes {
+        edges {
+          node {
+            product_size_name
+            spare_parts
             parent_model {
-              uid
+              ... on PRISMIC_Model {
+                _meta {
+                  uid
+                }
+              }
             }
             body {
-              ... on PrismicSizeBodyDocumentation {
-                id
-                items {
+              ... on PRISMIC_SizeBodyDocumentation {
+                fields {
                   attachment {
-                    url
-                    name
+                    ... on PRISMIC__FileLink {
+                      url
+                      name
+                    }
                   }
                 }
               }
-              ... on PrismicSizeBodyPictures {
-                id
-                items {
-                  product_size_image {
-                    url
-                    alt
-                  }
+              ... on PRISMIC_SizeBodyPictures {
+                fields {
+                  product_size_image
                 }
               }
-              ... on PrismicSizeBodySpecSheet {
-                id
-                items {
-                  spec_name {
-                    text
-                  }
-                  spec_value {
-                    text
-                  }
+              ... on PRISMIC_SizeBodySpec_sheet {
+                fields {
+                  spec_name
+                  spec_value
                 }
               }
             }
@@ -206,3 +188,5 @@ export const pageQuery = graphql`
     }
   }
 `
+
+export default ProductsTemplate

@@ -36,7 +36,7 @@ module.exports = {
     // `gatsby-plugin-offline`,
     `gatsby-plugin-less`,
     {
-      resolve: `gatsby-source-prismic`,
+      resolve: `gatsby-source-prismic-graphql`,
       options: {
         repositoryName: `recovered-energy-webiste`,
         accessToken: `${process.env.API_KEY}`,
@@ -47,9 +47,9 @@ module.exports = {
       resolve: `gatsby-source-shopify`,
       options: {
         // The domain name of your Shopify shop.
-        shopName: `boss-separator-parts`,
+        shopName: process.env.SHOPIFY_SHOP_NAME,
         // The storefront access token
-        accessToken: `${process.env.SHOPIFY_API_KEY}`,
+        accessToken: process.env.SHOPIFY_API_KEY,
       },
     },
   ],

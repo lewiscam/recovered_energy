@@ -3,13 +3,13 @@ import { Table, Button } from "semantic-ui-react"
 
 const SpecSheet = props => {
   function displaySpecs(specs) {
-    return specs.items.map((spec, index) => {
+    return specs.fields.map((spec, index) => {
       return (
         <Table.Row key={index}>
           <Table.Cell>
-            <strong>{spec.spec_name.text}</strong>
+            <strong>{spec.spec_name[0].text}</strong>
           </Table.Cell>
-          <Table.Cell>{spec.spec_value.text}</Table.Cell>
+          <Table.Cell>{spec.spec_value[0].text}</Table.Cell>
         </Table.Row>
       )
     })

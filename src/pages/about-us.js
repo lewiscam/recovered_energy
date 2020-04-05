@@ -3,15 +3,15 @@ import { graphql } from "gatsby"
 import Layout from "./../components/layout"
 import { Container } from "semantic-ui-react"
 
-const About = ({ data: { allPrismicAboutUs } }) => {
-  const aboutUs = allPrismicAboutUs.edges[0].node.data
+const About = ({ data: { prismic } }) => {
+  const aboutUs = prismic.allAbout_uss.edges[0].node
 
   return (
     <Layout>
       <Container text className="main-container">
-        <h1>{aboutUs.page_title.text}</h1>
+        <h1>{aboutUs.page_title[0].text}</h1>
         <div
-          dangerouslySetInnerHTML={{ __html: aboutUs.about_us_content.html }}
+          dangerouslySetInnerHTML={{ __html: aboutUs.about_us_content[0].text }}
         ></div>
       </Container>
     </Layout>
@@ -21,16 +21,12 @@ const About = ({ data: { allPrismicAboutUs } }) => {
 export default About
 export const pageQuery = graphql`
   query MyQuery {
-    allPrismicAboutUs {
-      edges {
-        node {
-          data {
-            about_us_content {
-              html
-            }
-            page_title {
-              text
-            }
+    prismic {
+      allAbout_uss {
+        edges {
+          node {
+            about_us_content
+            page_title
           }
         }
       }
