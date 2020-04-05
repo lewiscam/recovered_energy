@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import SEO from "../components/seo"
-import ProductForm from "../components/ProductForm"
+import ProductForm from "../components/productForm"
 import { Image, Grid, Container } from "semantic-ui-react"
 import Layout from "../components/layout"
 

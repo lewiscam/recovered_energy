@@ -2,8 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
-import SEO from "../components/seo"
-import { Container, Image, Grid, Card } from "semantic-ui-react"
+import { Image, Grid, Card } from "semantic-ui-react"
 const Systems = ({ pageContext, data: { prismic } }) => {
   const allProducts = prismic.allModels.edges.filter(
     edge => edge.node.system_category._meta.uid === pageContext.uid
