@@ -1,5 +1,5 @@
 import React from "react"
-import { useStaticQuery, Link, graphql, StaticQuery } from "gatsby"
+import { Link, graphql, StaticQuery } from "gatsby"
 import { Card, Image } from "semantic-ui-react"
 
 import Layout from "../components/layout"

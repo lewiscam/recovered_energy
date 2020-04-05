@@ -5,7 +5,7 @@ import { graphql, StaticQuery } from "gatsby"
 import { Menu, Dropdown } from "semantic-ui-react"
 import Image from "./image"
 
-const Header = ({ siteTitle }) => (
+const Header = () => (
   <StaticQuery
     query={graphql`
       query productNames {
@@ -93,13 +93,5 @@ const Header = ({ siteTitle }) => (
     )}
   />
 )
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
 
 export default Header
