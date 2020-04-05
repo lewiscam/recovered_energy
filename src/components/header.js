@@ -1,82 +1,98 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React, { useState } from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import React from "react"
+import { graphql, StaticQuery } from "gatsby"
 import { Menu, Dropdown } from "semantic-ui-react"
 import Image from "./image"
 
-const Header = ({ siteTitle }) => {
-  const data = useStaticQuery(graphql`
-    query productNames {
-      allPrismicModel {
-        nodes {
-          uid
-          data {
-            product_name {
-              text
+const Header = ({ siteTitle }) => (
+  <StaticQuery
+    query={graphql`
+      query productNames {
+        prismic {
+          allModels {
+            edges {
+              node {
+                _meta {
+                  uid
+                }
+                product_name
+              }
+            }
+          }
+          allSystem_categorys {
+            edges {
+              node {
+                _meta {
+                  uid
+                }
+                system_category_title
+              }
             }
           }
         }
       }
-      allPrismicSystemCategory {
-        nodes {
-          uid
-          data {
-            system_category_title {
-              text
-            }
-          }
-        }
-      }
-    }
-  `)
-  return (
-    <header>
-      <Menu primary>
-        <Menu.Item>
-          <Link to="/">
-            <Image />
-          </Link>
-        </Menu.Item>
-        <Menu.Menu position="right">
+    `}
+    render={data => (
+      <header>
+        <Menu primary>
           <Menu.Item>
-            <Link to="/about-us">About Us</Link>
+            <Link to="/">
+              <Image />
+            </Link>
           </Menu.Item>
+          <Menu.Menu position="right">
+            <Menu.Item>
+              <Link to="/about-us">About Us</Link>
+            </Menu.Item>
 
-          <Menu.Item>
-            <Link to="/parts">Parts</Link>
-          </Menu.Item>
+            <Menu.Item>
+              <Link to="/parts">Parts</Link>
+            </Menu.Item>
 
-          <Dropdown text="Products" className="link item" aria-label="Products">
-            <Dropdown.Menu>
-              {data.allPrismicModel.nodes.map((item, key) => (
-                <Link to={"/products/" + item.uid} key={key}>
-                  <Dropdown.Item key={key}>
-                    {item.data.product_name.text}
-                  </Dropdown.Item>
-                </Link>
-              ))}
-            </Dropdown.Menu>
-          </Dropdown>
-          <Menu.Item>
-            <Link to="/contact">Contact Us</Link>
-          </Menu.Item>
-          <Dropdown text="Systems" className="link item" aria-label="Systems">
-            <Dropdown.Menu>
-              {data.allPrismicSystemCategory.nodes.map((item, key) => (
-                <Link to={"/systems/" + item.uid} key={key} state={{ item }}>
-                  <Dropdown.Item key={key}>
-                    {item.data.system_category_title.text}
-                  </Dropdown.Item>
-                </Link>
-              ))}
-            </Dropdown.Menu>
-          </Dropdown>
-        </Menu.Menu>
-      </Menu>
-    </header>
-  )
-}
+            <Dropdown
+              text="Products"
+              className="link item"
+              aria-label="Products"
+            >
+              <Dropdown.Menu>
+                {data.prismic.allModels.edges.map((item, key) => (
+                  <Link to={"/products/" + item.node._meta.uid} key={key}>
+                    <Dropdown.Item key={key}>
+                      {item.node.product_name[0].text}
+                    </Dropdown.Item>
+                  </Link>
+                ))}
+              </Dropdown.Menu>
+            </Dropdown>
+            <Menu.Item>
+              <Link to="/contact">Contact Us</Link>
+            </Menu.Item>
+            <Dropdown text="Systems" className="link item" aria-label="Systems">
+              <Dropdown.Menu>
+                {data.prismic.allSystem_categorys.edges.map((item, key) => (
+                  <Link
+                    to={"/systems/" + item.node._meta.uid}
+                    key={key}
+                    state={{ item }}
+                  >
+                    <Dropdown.Item key={key}>
+                      {item.node.system_category_title[0].text}
+                    </Dropdown.Item>
+                  </Link>
+                ))}
+              </Dropdown.Menu>
+            </Dropdown>
+
+            <Menu.Item>
+              <Link to="/cart">Cart</Link>
+            </Menu.Item>
+          </Menu.Menu>
+        </Menu>
+      </header>
+    )}
+  />
+)
 
 Header.propTypes = {
   siteTitle: PropTypes.string,

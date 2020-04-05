@@ -2,25 +2,29 @@ import React from "react"
 import { Link } from "gatsby"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
-import SEO from "../components/seo"
-import { Container, Image, Grid, Card } from "semantic-ui-react"
-const Systems = ({ pageContext, data: { allPrismicModel } }) => {
-  const allProducts = allPrismicModel.edges.filter(
-    edge => edge.node.data.system_category.uid === pageContext.uid
+import { Image, Grid, Card } from "semantic-ui-react"
+const Systems = ({ pageContext, data: { prismic } }) => {
+  const allProducts = prismic.allModels.edges.filter(
+    edge => edge.node.system_category._meta.uid === pageContext.uid
   )
 
   const displayProduct = allProducts.map(product => {
     return (
       <Card>
-        <Image
-          src={product.node.data.model_feature_image.url}
-          wrapped
-          ui={false}
-        />
+        {product.node.model_feature_image ? (
+          <Image
+            src={product.node.model_feature_image.url}
+            wrapped
+            ui={false}
+          />
+        ) : null}
         <Card.Content>
           <Card.Header>
-            <Link to={"/products/" + product.node.uid} key={product.node.uid}>
-              <h2>{product.node.data.product_name.text}</h2>
+            <Link
+              to={"/products/" + product.node._meta.uid}
+              key={product.node._meta.uid}
+            >
+              <h2>{product.node.product_name.text}</h2>
             </Link>
           </Card.Header>
         </Card.Content>
@@ -31,7 +35,7 @@ const Systems = ({ pageContext, data: { allPrismicModel } }) => {
   ////// not using yet. still working on getting this to work ///////
   // const currentSystemCategory =
   // allProducts.filter(currentCategory =>
-  //     currentCategory.node.data.system_category.document[0].uid === window.history.state.item.uid
+  //     currentCategory.node.system_category.document[0].uid === window.history.state.item.uid
   //     )
 
   return (
@@ -49,25 +53,22 @@ export default Systems
 
 export const systemsQuery = graphql`
   query getProducts {
-    allPrismicModel {
-      edges {
-        node {
-          uid
-          data {
-            model_feature_image {
-              url
-            }
-            product_name {
-              text
-            }
-            system_category {
+    prismic {
+      allModels {
+        edges {
+          node {
+            _meta {
               uid
-              document {
-                data {
-                  system_category_title {
-                    text
-                  }
+            }
+            model_feature_image
+            product_description
+            product_name
+            system_category {
+              ... on PRISMIC_System_category {
+                _meta {
+                  uid
                 }
+                system_category_title
               }
             }
           }

@@ -15,6 +15,7 @@ import { Container } from "semantic-ui-react"
 import Header from "./header"
 import Footer from "./footer"
 import Masthead from "./masthead"
+import ContextProvider from "../provider/ContextProvider"
 
 const Layout = ({ children, showMasthead }) => {
   const data = useStaticQuery(graphql`
@@ -28,7 +29,7 @@ const Layout = ({ children, showMasthead }) => {
   `)
 
   return (
-    <>
+    <ContextProvider>
       <Header siteTitle={data.site.siteMetadata.title} />
       {showMasthead ? <Masthead /> : null}
       <div
@@ -44,7 +45,7 @@ const Layout = ({ children, showMasthead }) => {
         </Container>
       </div>
       <Footer />
-    </>
+    </ContextProvider>
   )
 }
 
