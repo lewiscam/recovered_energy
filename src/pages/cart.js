@@ -8,7 +8,7 @@ const CartPage = () => (
   <Layout>
     <Container className="main-container">
       <h1>Cart</h1>
-      <Cart />
+      {/* <Cart /> */}
     </Container>
   </Layout>
 )

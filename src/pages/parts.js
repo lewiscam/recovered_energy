@@ -5,7 +5,7 @@ import ProductGrid from "../components/productGrid"
 const PartsPage = ({ data }) => (
   <Layout>
     <h1>Products</h1>
-    <ProductGrid />
+    {/* <ProductGrid /> */}
   </Layout>
 )
 
