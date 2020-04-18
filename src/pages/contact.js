@@ -8,7 +8,6 @@ import SEO from "../components/seo"
 const ContactPage = () => (
   <Layout>
     <SEO title="Contact" />
-    <h1>Contact Us</h1>
     <Grid columns={2} stackable>
       <Grid.Row>
         <Grid.Column>

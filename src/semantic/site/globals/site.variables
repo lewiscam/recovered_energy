@@ -10,7 +10,7 @@
 @secondaryColor : #323b48;
 @lightPrimaryColor: #66bc7d;
 @lightSecondaryColor: #f1f5f9;
-@pageBackground: #f1f5f9;
+@pageBackground: #ffffff;
 
 /*-------------------
        Fonts

@@ -10,13 +10,6 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const pages = await graphql(`
     {
-      allShopifyProduct {
-        edges {
-          node {
-            handle
-          }
-        }
-      }
       prismic {
         allModels {
           edges {
@@ -61,15 +54,15 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
-  pages.data.allShopifyProduct.edges.forEach(({ node }) => {
-    createPage({
-      path: `/part/${node.handle}`,
-      component: path.resolve(`src/templates/part.js`),
-      context: {
-        handle: node.handle,
-      },
-    })
-  })
+  // pages.data.allShopifyProduct.edges.forEach(({ node }) => {
+  //   createPage({
+  //     path: `/part/${node.handle}`,
+  //     component: path.resolve(`src/templates/part.js`),
+  //     context: {
+  //       handle: node.handle,
+  //     },
+  //   })
+  // })
 }
 
 exports.onCreateWebpackConfig = ({ actions }) => {
