@@ -96,42 +96,48 @@ const ProductsTemplate = ({ data: { prismic } }) => {
     <Layout>
       <Container className="main-container">
         <SEO title="Products" />
-        <Item.Group>
-          <Item>
-            <Item.Image
-              size="small"
-              src={
-                getSlice(selectedSize, "PRISMIC_SizeBodyPictures").fields[0]
-                  .product_size_image.url
-              }
-            />
-
-            <Item.Content>
-              <Item.Header as="h1">{model.product_name[0].text}</Item.Header>
-              <Item.Description>
-                <Header as="h2">
-                  Size: {selectedSize.node.product_size_name[0].text}
-                </Header>
-                <Button content="Get a Quote" primary />
-                <Dropdown
-                  text="Sizes"
-                  options={options}
-                  onChange={onSizeChange}
-                  button
+        {!!selectedSize ? (
+          <>
+            <Item.Group>
+              <Item>
+                <Item.Image
+                  size="small"
+                  src={
+                    getSlice(selectedSize, "PRISMIC_SizeBodyPictures").fields[0]
+                      .product_size_image.url
+                  }
                 />
-              </Item.Description>
-            </Item.Content>
-          </Item>
-        </Item.Group>
-        <Tab
-          style={{ marginTop: "2rem" }}
-          menu={{
-            secondary: true,
-            pointing: true,
-            fluid: true,
-          }}
-          panes={panes}
-        />
+
+                <Item.Content>
+                  <Item.Header as="h1">
+                    {model.product_name[0].text}
+                  </Item.Header>
+                  <Item.Description>
+                    <Header as="h2">
+                      Size: {selectedSize.node.product_size_name[0].text}
+                    </Header>
+                    <Button content="Get a Quote" primary />
+                    <Dropdown
+                      text="Sizes"
+                      options={options}
+                      onChange={onSizeChange}
+                      button
+                    />
+                  </Item.Description>
+                </Item.Content>
+              </Item>
+            </Item.Group>
+            <Tab
+              style={{ marginTop: "2rem" }}
+              menu={{
+                secondary: true,
+                pointing: true,
+                fluid: true,
+              }}
+              panes={panes}
+            />
+          </>
+        ) : null}
       </Container>
     </Layout>
   )
