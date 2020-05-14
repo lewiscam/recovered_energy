@@ -3,23 +3,10 @@ import PropTypes from "prop-types"
 import "semantic-ui-less/semantic.less"
 import "./layout.less"
 import { Container } from "semantic-ui-react"
+import { sendPostMessage } from "./../utils/sendPostMessage"
 
 const Layout = ({ children, showMasthead }) => {
-  let height
   if (typeof window !== "undefined") {
-    const sendPostMessage = () => {
-      if (height !== document.getElementById("main").offsetHeight) {
-        height = document.getElementById("main").offsetHeight
-        window.parent.postMessage(
-          {
-            frameHeight: height,
-          },
-          "*"
-        )
-        console.log(height) // check the message is being sent correctly
-      }
-    }
-
     window.onload = () => sendPostMessage()
     window.onresize = () => sendPostMessage()
   }

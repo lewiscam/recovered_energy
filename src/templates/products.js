@@ -15,6 +15,7 @@ import {
   Container,
   Item,
 } from "semantic-ui-react"
+import { sendPostMessage } from "./../utils/sendPostMessage"
 
 const ProductsTemplate = ({ data: { prismic } }) => {
   const model = prismic.model
@@ -40,6 +41,11 @@ const ProductsTemplate = ({ data: { prismic } }) => {
         size => data.value === size.node.product_size_name[0].text
       )[0]
     )
+    sendPostMessage()
+  }
+
+  const onTabChange = () => {
+    sendPostMessage()
   }
 
   const panes = [
@@ -135,6 +141,7 @@ const ProductsTemplate = ({ data: { prismic } }) => {
                 fluid: true,
               }}
               panes={panes}
+              onTabChange={onTabChange}
             />
           </>
         ) : null}
