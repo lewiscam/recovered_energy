@@ -6,7 +6,7 @@ import { Container } from "semantic-ui-react"
 
 const Layout = ({ children, showMasthead }) => {
   let height
-  if (typeof window === "undefined") {
+  if (typeof window !== "undefined") {
     const sendPostMessage = () => {
       if (height !== document.getElementById("main").offsetHeight) {
         height = document.getElementById("main").offsetHeight
