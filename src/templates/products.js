@@ -42,9 +42,11 @@ const ProductsTemplate = ({ data: { prismic } }) => {
       )[0]
     )
     sendPostMessage()
+    sendPostMessage()
   }
 
   const onTabChange = () => {
+    sendPostMessage()
     sendPostMessage()
   }
 
