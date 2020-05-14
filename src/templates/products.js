@@ -23,7 +23,7 @@ const ProductsTemplate = ({ data: { prismic } }) => {
   const allSizes = prismic.allSizes.edges.filter(
     element => element.node.parent_model._meta.uid === prismic.model._meta.uid
   )
-  const [selectedSize, setSelectedSize] = useState(prismic.allSizes.edges[0])
+  const [selectedSize, setSelectedSize] = useState(allSizes[0])
   const options = allSizes.map((size, key) => ({
     key,
     text: size.node.product_size_name[0].text,
