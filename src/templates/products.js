@@ -116,7 +116,7 @@ const ProductsTemplate = ({ data: { prismic } }) => {
                     <Header as="h2">
                       Size: {selectedSize.node.product_size_name[0].text}
                     </Header>
-                    <Button content="Get a Quote" primary />
+                    {/* <Button content="Get a Quote" primary /> */}
                     <Dropdown
                       text="Sizes"
                       options={options}
