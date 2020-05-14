@@ -6,21 +6,23 @@ import { Container } from "semantic-ui-react"
 
 const Layout = ({ children, showMasthead }) => {
   let height
-  const sendPostMessage = () => {
-    if (height !== document.getElementById("main").offsetHeight) {
-      height = document.getElementById("main").offsetHeight
-      window.parent.postMessage(
-        {
-          frameHeight: height,
-        },
-        "*"
-      )
-      console.log(height) // check the message is being sent correctly
+  if (!typeof window === "undefined") {
+    const sendPostMessage = () => {
+      if (height !== document.getElementById("main").offsetHeight) {
+        height = document.getElementById("main").offsetHeight
+        window.parent.postMessage(
+          {
+            frameHeight: height,
+          },
+          "*"
+        )
+        console.log(height) // check the message is being sent correctly
+      }
     }
-  }
 
-  window.onload = () => sendPostMessage()
-  window.onresize = () => sendPostMessage()
+    window.onload = () => sendPostMessage()
+    window.onresize = () => sendPostMessage()
+  }
   return (
     <Container id="main">
       <main>{children}</main>
