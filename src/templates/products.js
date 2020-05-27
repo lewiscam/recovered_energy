@@ -52,7 +52,7 @@ const ProductsTemplate = ({ data: { prismic } }) => {
     {
       menuItem: "Description",
       render: () => (
-        <Tab.Pane attached={false}>
+        <Tab.Pane>
           <Description content={model.product_description[0].text} />
         </Tab.Pane>
       ),
@@ -60,7 +60,7 @@ const ProductsTemplate = ({ data: { prismic } }) => {
     {
       menuItem: "Specifications",
       render: () => (
-        <Tab.Pane attached={false}>
+        <Tab.Pane>
           <SpecSheet
             specs={getSlice(selectedSize, "PRISMIC_SizeBodySpec_sheet")}
           />
@@ -70,7 +70,7 @@ const ProductsTemplate = ({ data: { prismic } }) => {
     {
       menuItem: "Documentation",
       render: () => (
-        <Tab.Pane attached={false}>
+        <Tab.Pane>
           <Documentation
             documentation={getSlice(
               selectedSize,
@@ -83,7 +83,7 @@ const ProductsTemplate = ({ data: { prismic } }) => {
     {
       menuItem: "Photos",
       render: () => (
-        <Tab.Pane attached={false}>
+        <Tab.Pane>
           <Photos photos={getSlice(selectedSize, "PRISMIC_SizeBodyPictures")} />
         </Tab.Pane>
       ),
@@ -91,7 +91,7 @@ const ProductsTemplate = ({ data: { prismic } }) => {
     {
       menuItem: "Spare Parts",
       render: () => (
-        <Tab.Pane attached={false}>
+        <Tab.Pane>
           <Spares spareParts={selectedSize.node} />
         </Tab.Pane>
       ),
@@ -141,7 +141,6 @@ const ProductsTemplate = ({ data: { prismic } }) => {
                 fluid: true,
               }}
               panes={panes}
-              renderActiveOnly={false}
               onTabChange={onTabChange}
             />
           </>

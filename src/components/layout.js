@@ -11,7 +11,7 @@ const Layout = ({ children, showMasthead }) => {
     window.onresize = () => sendPostMessage()
   }
   return (
-    <Container id="main">
+    <Container id="main" className="main-container">
       <main>{children}</main>
     </Container>
   )
