@@ -83,14 +83,14 @@ const ProductsTemplate = ({ data: { prismic } }) => {
         </Tab.Pane>
       ),
     },
-    {
-      menuItem: "Spare Parts",
-      render: () => (
-        <Tab.Pane>
-          <Spares spareParts={selectedSize.node} />
-        </Tab.Pane>
-      ),
-    },
+    // {
+    //   menuItem: "Spare Parts",
+    //   render: () => (
+    //     <Tab.Pane>
+    //       <Spares spareParts={selectedSize.node} />
+    //     </Tab.Pane>
+    //   ),
+    // },
   ]
 
   return (
