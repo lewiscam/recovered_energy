@@ -40,7 +40,7 @@ const ProductsTemplate = ({ data: { prismic } }) => {
   const onTabChange = () => {
     setTimeout(() => {
       sendPostMessage()
-    }, 500)
+    }, 200)
   }
 
   const panes = [
