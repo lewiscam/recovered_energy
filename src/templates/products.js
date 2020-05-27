@@ -7,14 +7,7 @@ import Spares from "../components/spares"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
-import {
-  Dropdown,
-  Tab,
-  Button,
-  Header,
-  Container,
-  Item,
-} from "semantic-ui-react"
+import { Dropdown, Tab, Header, Container, Item } from "semantic-ui-react"
 import { sendPostMessage } from "./../utils/sendPostMessage"
 
 const ProductsTemplate = ({ data: { prismic } }) => {
@@ -45,7 +38,9 @@ const ProductsTemplate = ({ data: { prismic } }) => {
   }
 
   const onTabChange = () => {
-    sendPostMessage()
+    setTimeout(() => {
+      sendPostMessage()
+    }, 500)
   }
 
   const panes = [
