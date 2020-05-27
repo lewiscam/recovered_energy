@@ -42,11 +42,9 @@ const ProductsTemplate = ({ data: { prismic } }) => {
       )[0]
     )
     sendPostMessage()
-    sendPostMessage()
   }
 
   const onTabChange = () => {
-    sendPostMessage()
     sendPostMessage()
   }
 
@@ -143,6 +141,7 @@ const ProductsTemplate = ({ data: { prismic } }) => {
                 fluid: true,
               }}
               panes={panes}
+              renderActiveOnly={false}
               onTabChange={onTabChange}
             />
           </>
